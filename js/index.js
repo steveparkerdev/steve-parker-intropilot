@@ -110,7 +110,7 @@ fetch("https://api.github.com/users/steveparkerdev/repos")
 
             // Repo description
             var repoDescription = document.createElement("p");
-            repoDescription.textContent = repositories.description || "No description provided";
+            repoDescription.textContent = repositories[i].description || "No description provided";
             repoDescription.className = "repo-description";
 
             // Append name and description to the card
@@ -125,4 +125,3 @@ fetch("https://api.github.com/users/steveparkerdev/repos")
     .catch ((error) => {
     console.error("Error fetching repositories:", error);
 });
-
