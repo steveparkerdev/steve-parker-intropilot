@@ -87,14 +87,13 @@ fetch("https://api.github.com/users/steveparkerdev/repos")
 
     // Get the data and add it to the html
     .then((data) => {
+        console.log("json data =", data);
         repositories = [...data];
         console.log("repositories array =", repositories);
 
         // Find the project section and ul
         const projectSection = document.getElementById("projects-section");
         const projectList = projectSection.querySelector("ul");
-
-        projectList.innerHTML = "";
 
         // Create the repositories list by adding it to the html
         for (let i = 0; i < repositories.length; i++) {
@@ -112,7 +111,7 @@ fetch("https://api.github.com/users/steveparkerdev/repos")
 
             // Repo description
             var repoDescription = document.createElement("p");
-            repoDescription.textContent = repo.description || "No description provided";
+            repoDescription.textContent = repositories.description || "No description provided";
             repoDescription.className = "repo-description";
 
             // Append name and description to the card
