@@ -27,7 +27,7 @@ const skills = ["Git", "GitHub", "HTML", "CSS", "JavaScript"];
 // Find the skills section and unordered list
 const skillsSection = document.querySelector("#skills-section");
 var skillsList = skillsSection.getElementsByTagName("ul")[0];
-for (let i=0; i<skills.length; i++) {
+for (let i = 0; i < skills.length; i++) {
     var skill = document.createElement("li");
     skill.textContent = skills[i];
     skillsList.appendChild(skill);
@@ -64,7 +64,7 @@ messageForm.addEventListener("submit", function (event) {
     removeButton.innerText = "remove";
     removeButton.type = "button";
 
-    removeButton.addEventListener("click", function() {
+    removeButton.addEventListener("click", function () {
         const entry = removeButton.parentNode;
         entry.remove();
     });
@@ -74,4 +74,56 @@ messageForm.addEventListener("submit", function (event) {
 
     // Resets form
     messageForm.reset();
+});
+
+// Get the repositories from github
+fetch("https://api.github.com/users/steveparkerdev/repos")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Request failed");
+        }
+        return response.json(); // Parse the response as JSON
+    })
+
+    // Get the data and add it to the html
+    .then((data) => {
+        repositories = [...data];
+        console.log("repositories array =", repositories);
+
+        // Find the project section and ul
+        const projectSection = document.getElementById("projects-section");
+        const projectList = projectSection.querySelector("ul");
+
+        projectList.innerHTML = "";
+
+        // Create the repositories list by adding it to the html
+        for (let i = 0; i < repositories.length; i++) {
+            var project = document.createElement("li");
+            project.className = "projects-list";
+
+            // Repo card
+            var card = document.createElement("div");
+            card.className = "project-card";
+
+            // Repo name
+            var repoName = document.createElement("h3");
+            repoName.textContent = repositories[i].name;
+            repoName.className = "repo-name";
+
+            // Repo description
+            var repoDescription = document.createElement("p");
+            repoDescription.textContent = repo.description || "No description provided";
+            repoDescription.className = "repo-description";
+
+            // Append name and description to the card
+            card.appendChild(repoName);
+            card.appendChild(repoDescription);
+
+            // Append card to li, then li to ul
+            project.appendChild(card);
+            projectList.appendChild(project);
+        }
+    })
+    .catch ((error) => {
+    console.error("Error fetching repositories:", error);
 });

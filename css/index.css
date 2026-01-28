@@ -1,5 +1,5 @@
 body {
-    background-color: blanchedalmond;
+    background-color: #ffffffde;
     color: darkblue;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -34,4 +34,39 @@ h1 {
 
 #Experience ul {
     list-style: square;
+}
+
+#projects-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.projects-list {
+    flex: 1 1 300px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.repo-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #0366d6;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.repo-description {
+    font-size: 15px;
+    color: #333;
 }
